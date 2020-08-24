@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.3.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.github.fwidder</groupId>
+	<artifactId>valorantBot</artifactId>
+	<version>0.0.1</version>
+	<name>valorantBot</name>
+	<description>Bot for the Shooter Valorant</description>
+
+	<properties>
+		<java.version>11</java.version>
+		<launch4j.version>1.7.25</launch4j.version>
+	</properties>
+
+	<dependencies>
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- Dev Tools -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- Scheduling -->
+		<dependency>
+			<groupId>org.awaitility</groupId>
+			<artifactId>awaitility</artifactId>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.akathist.maven.plugins.launch4j</groupId>
+				<artifactId>launch4j-maven-plugin</artifactId>
+				<version>${launch4j.version}</version>
+				<configuration>
+					<headerType>console</headerType>
+					<outfile>${project.build.directory}/${project.artifactId}.exe</outfile>
+					<jar>${project.build.directory}/${project.artifactId}-${project.version}.jar</jar>
+					<errTitle>${project.artifactId}</errTitle>
+					<classPath>
+						<mainClass>org.springframework.boot.loader.JarLauncher</mainClass>
+						<addDependencies>false</addDependencies>
+						<preCp>anything</preCp>
+					</classPath>
+					<jre>
+						<minVersion>${java.version}</minVersion>
+					</jre>
+					<versionInfo>
+						<fileVersion>${project.version}.0</fileVersion>
+						<txtFileVersion>${project.version}.0</txtFileVersion>
+						<fileDescription>a description</fileDescription>
+						<copyright>Pragtics 2019</copyright>
+						<productVersion>${project.version}.0</productVersion>
+						<txtProductVersion>${project.version}.0</txtProductVersion>
+						<productName>${project.artifactId}</productName>
+						<internalName>${project.artifactId}</internalName>
+						<originalFilename>${project.artifactId}.exe</originalFilename>
+					</versionInfo>
+				</configuration>
+				<executions>
+					<execution>
+						<id>build-windows-executable</id>
+						<phase>package</phase>
+						<goals>
+							<goal>launch4j</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

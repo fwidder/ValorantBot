@@ -1,0 +1,11 @@
+valorant:
+  bot:
+    debug:
+      imageDump:
+        enabled: false
+    display:
+      enabled: true
+      showFPS: true
+logging:
+  level: 
+    root: INFO
